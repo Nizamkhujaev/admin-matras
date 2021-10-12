@@ -9,6 +9,9 @@ import Header from './containers/header';
 
 import Home from './pages/home';
 import Customers from './pages/customer';
+import Categories from './pages/category';
+
+import Error from './pages/error'
 
 
 import './assets/styles/main.scss'
@@ -28,6 +31,8 @@ function App() {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/customers' component={Customers} />
+            <Route path='/categories' component={Categories} />
+            <Route path='*' component={Error} />
           </Switch>
         </div>
       </div>

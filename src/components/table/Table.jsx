@@ -41,7 +41,7 @@ function Table() {
 
     function checking(e) {
         console.log(arr)
-        let data = arr.find(item => item.id == e.target.parentNode.parentNode.parentNode.dataset.id)
+        let data = arr.find(item => item.id === e.target.parentNode.parentNode.parentNode.dataset.id)
         console.log(data, 'start')
         if(e.target.checked === false) {
             data.feedBack = false

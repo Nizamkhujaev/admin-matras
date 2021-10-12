@@ -1,10 +1,12 @@
 import React from 'react'
 import './customer.scss'
 
+import CustomerTable from '../../containers/customerTable'
+
 function Customers() {
     return (
         <div className='customers'>
-            <h1>Customers</h1>
+            <CustomerTable/>
         </div>
     )
 }

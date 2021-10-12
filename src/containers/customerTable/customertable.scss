@@ -1,0 +1,124 @@
+.customer-table {
+    border: 1px solid rgba(1, 56, 77, 0.3) !important;
+    table {
+        border-collapse: collapse !important;
+        // border:1px solid black;
+        width: 100%;
+        border-spacing: 0;
+        thead {
+            border-spacing: 0;
+            background: #01384D;
+            color: #fff;
+            padding: 16px 30px !important;
+            border: none !important;
+
+            th {
+                padding: 16px;
+            }
+        }
+    }
+
+    tbody {
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(1,56,77,0.2);
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: #12AF18;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        //#12AF18
+
+        input:checked+.slider {
+            background-color: rgba(18,175,24,0.3);
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        td {
+            padding: 21px 0;
+            text-align: center;
+        }
+
+        tr:not(:last-child ) {
+            border-bottom: 1px solid rgba(1, 56, 77, 0.3) !important;
+            border-spacing: 2px;
+        }
+
+        svg {
+            padding: 10px;
+            background-color: #fff;
+            cursor: pointer;
+            color: #D61F1F;
+            border-radius: 5px;
+            position: relative;
+            z-index: -1;
+            background: rgba(214,31,31,0.1);
+        }
+
+        .div-wrapper {
+            position: relative;
+            z-index: 33;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        tr {
+            td:last-child {
+                width: 500px;
+                text-align: right;
+                padding-right: 28px;
+                box-sizing: border-box;
+            }
+        }
+    }
+}
