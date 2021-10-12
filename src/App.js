@@ -8,6 +8,7 @@ import Sidebar from './containers/sidebar';
 import Header from './containers/header';
 
 import Home from './pages/home';
+import Customers from './pages/customer';
 
 
 import './assets/styles/main.scss'
@@ -26,7 +27,7 @@ function App() {
           <Header />
           <Switch>
             <Route exact path='/' component={Home} />
-
+            <Route path='/customers' component={Customers} />
           </Switch>
         </div>
       </div>

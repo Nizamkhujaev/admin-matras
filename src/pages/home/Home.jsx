@@ -1,9 +1,11 @@
 import React from 'react'
+import './home.scss'
+import Table from '../../components/table'
 
 function Home() {
     return (
         <div className='home'>
-            <h1>Home</h1>
+            <Table/>
         </div>
     )
 }
