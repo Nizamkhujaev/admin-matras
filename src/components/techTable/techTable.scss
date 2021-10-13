@@ -1,25 +1,29 @@
-.category {
-    padding: 30px 30px 100px 30px;
-
-    &-table {
+.tech-table {
+    border: 1px solid rgba(1, 56, 77, 0.3) !important;
+    &-main {
+        border-collapse: collapse !important;
+        // border:1px solid black;
         width: 100%;
-        &-top {
-            padding: 16px 40px;
-            box-sizing: border-box;
-            background: #01384D;
+        border-spacing: 0;
 
-            &__title {
-                font-style: normal;
-                font-weight: 600;
-                font-size: 15px;
-                line-height: 18px;
-                color: #FFFFFF;
+        thead {
+            border-spacing: 0;
+            background: #01384D;
+            color: #fff;
+            padding: 16px 30px !important;
+            border: none !important;
+
+            th {
+                padding: 16px;
             }
         }
 
-    }
-    &-bottom {
-        border-bottom:1px solid rgba(1, 56, 77, 0.3);
+        tbody {
+            tr:not(:last-child ) {
+                border-bottom: 1px solid rgba(1, 56, 77, 0.3) !important;
+                border-spacing: 2px;
+            }
+        }
     }
 
     &__btn-add {

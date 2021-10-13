@@ -2,10 +2,12 @@ import React from 'react'
 import './category.scss'
 
 import CategoryItem from '../../components/categoryItem'
+import AddCategory from '../../components/addCategory'
 
-function Categories() {
+function Categories({addCategory, setAddCategory}) {
+
     return (
-        <div className='category'>
+        <div className={`category`}>
             <div className="category-table">
                 <div className="category-table-top">
                     <h4 className="category-table-top__title">Toifalar</h4>
@@ -61,10 +63,15 @@ function Categories() {
             </div>
 
             <div className="category-add">
-                <button className="category__btn-add">
+                <button onClick={() => setAddCategory(!addCategory)} className="category__btn-add">
                     Qo’shish
                 </button>
             </div>
+
+            <AddCategory
+                addCategory={addCategory}
+                setAddCategory={setAddCategory}
+            />
         </div>
     )
 }

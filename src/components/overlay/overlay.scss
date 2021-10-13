@@ -1,0 +1,13 @@
+.overlay {
+    width: 0;
+    height: 0;
+
+    &.overlay-category {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        background-color: rgba(0,0,0,0.4);
+        overflow: hidden;
+        z-index: 100;
+    }
+}

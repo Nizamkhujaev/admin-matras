@@ -1,0 +1,34 @@
+.tech-item {
+    td {
+        padding: 21px 0;
+        text-align: center;
+    }
+
+    .end-tech {
+        padding-right: 28px;
+        display: flex;
+        justify-content: flex-end;
+
+        .edit {
+            border-radius: 5px;
+            background-color: rgba(1,56,77,0.1);
+            padding: 8px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .delete {
+            background: rgba(214,31,31,0.1);
+            color: #D61F1F;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+
+    tr:not(:last-child ) {
+        border-bottom: 1px solid rgba(1, 56, 77, 0.3) !important;
+        border-spacing: 2px;
+        max-width: 400px;
+    }
+}
