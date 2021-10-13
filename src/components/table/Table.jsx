@@ -39,17 +39,17 @@ function Table() {
         
     ]
 
-    function checking(e) {
-        console.log(arr)
-        let data = arr.find(item => item.id === e.target.parentNode.parentNode.parentNode.dataset.id)
-        console.log(data, 'start')
-        if(e.target.checked === false) {
-            data.feedBack = false
-        } else {
-            data.feedBack = true
-        }
-        console.log(data, 'over')
-    }
+    // function checking(e) {
+    //     console.log(arr)
+    //     let data = arr.find(item => item.id === e.target.parentNode.parentNode.parentNode.dataset.id)
+    //     console.log(data, 'start')
+    //     if(e.target.checked === false) {
+    //         data.feedBack = false
+    //     } else {
+    //         data.feedBack = true
+    //     }
+    //     console.log(data, 'over')
+    // }
 
     return (
         <div className='table'>
@@ -76,7 +76,7 @@ function Table() {
                                     <td>{item.amount}</td>
                                     <td>
                                         <label className="switch">
-                                            <input checked={item.feedBack ? true : false} onChange={checking} type="checkbox" />
+                                            <input checked={item.feedBack ? true : false} onChange={e => e} type="checkbox" />
                                             <span className="slider round"></span>
                                         </label>
                                     </td>

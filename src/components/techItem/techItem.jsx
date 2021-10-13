@@ -4,7 +4,14 @@ import './techItem.scss'
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
-function TechItem({ names, text, videoLink, id }) {
+function TechItem({ names, text, videoLink, id, setDeletedCategory,editCategory,setEditCategory,setRouteName }) {
+
+    function click(e) {
+        setEditCategory(!editCategory)
+        setDeletedCategory(e.target.parentNode.parentNode.dataset.tech)
+        setRouteName('technologies')
+    }
+
     return (
         <tr data-tech={id} className='tech-item'>
             <td>{names}</td>
@@ -14,7 +21,7 @@ function TechItem({ names, text, videoLink, id }) {
                 <div className="edit">
                     <ModeEditIcon />
                 </div>
-                <div className="delete">
+                <div onClick={click} className="delete">
                     <RestoreFromTrashIcon />
                 </div>
             </td>

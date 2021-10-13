@@ -1,9 +1,9 @@
 import React from 'react'
 import './overlay.scss'
 
-function Overlay({addCategory}) {
+function Overlay({addCategory,editCategory}) {
     return (
-        <div className={`overlay ${addCategory ? 'overlay-category' : ''}`}></div>
+        <div className={`overlay ${addCategory ? 'overlay-category' : editCategory ? 'overlay-category' : ''}`}></div>
     )
 }
 

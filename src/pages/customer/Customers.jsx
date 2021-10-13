@@ -3,10 +3,16 @@ import './customer.scss'
 
 import CustomerTable from '../../containers/customerTable'
 
-function Customers() {
+function Customers({setDeletedCategory,deletedCategory,editCategory,setEditCategory,routeName,setRouteName}) {
     return (
         <div className='customers'>
-            <CustomerTable/>
+            <CustomerTable
+                deletedCategory={deletedCategory}
+                setDeletedCategory={setDeletedCategory}
+                editCategory={editCategory}
+                setEditCategory={setEditCategory}
+                setRouteName={setRouteName}
+            />
         </div>
     )
 }

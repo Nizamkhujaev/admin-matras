@@ -6,7 +6,7 @@ import ProductItem from '../productItem';
 // import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 // import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
-function PrductTable() {
+function PrductTable({ deleteCategory, setDeletedCategory, setRouteName,editCategory,setEditCategory }) {
 
     let products = [
         {
@@ -54,22 +54,27 @@ function PrductTable() {
                 </thead>
 
                 <tbody>
-                {
-                    products && products.length > 0 ? (
-                        products.map((item,index) => (
-                            <ProductItem
-                                productName={item.productName}
-                                category={item.category}
-                                price={item.price}
-                                weight={item.weight}
-                                size= {item.size}
-                                status={item.status}
-                                key={index}
-                                id={item.id}
-                            />
-                        ))
-                    ) : ''
-                }
+                    {
+                        products && products.length > 0 ? (
+                            products.map((item, index) => (
+                                <ProductItem
+                                    productName={item.productName}
+                                    category={item.category}
+                                    price={item.price}
+                                    weight={item.weight}
+                                    size={item.size}
+                                    status={item.status}
+                                    key={index}
+                                    id={item.id}
+                                    deletedCategory={deleteCategory}
+                                    setDeletedCategory={setDeletedCategory}
+                                    setRouteName={setRouteName}
+                                    editCategory={editCategory}
+                                    setEditCategory={setEditCategory}
+                                />
+                            ))
+                        ) : ''
+                    }
                 </tbody>
 
                 {/* <tbody>

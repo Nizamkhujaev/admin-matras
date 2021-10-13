@@ -1,12 +1,12 @@
 import React from 'react'
-import './teachnologies.scss'
+import './location.scss'
 
-import TechTable from '../../components/techTable'
+import LocationTable from '../../containers/locationTable'
 
-function Technologies({setDeletedCategory,editCategory,setEditCategory,setRouteName}) {
+function Location({setDeletedCategory,editCategory,setEditCategory,setRouteName}) {
     return (
-        <div className='technologies'>
-            <TechTable
+        <div className='location'>
+            <LocationTable
                 setDeletedCategory={setDeletedCategory}
                 setRouteName={setRouteName}
                 editCategory={editCategory}
@@ -16,4 +16,4 @@ function Technologies({setDeletedCategory,editCategory,setEditCategory,setRouteN
     )
 }
 
-export default Technologies
+export default Location

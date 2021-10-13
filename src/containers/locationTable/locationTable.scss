@@ -1,0 +1,41 @@
+.location-table {
+    border: 1px solid rgba(1, 56, 77, 0.3) !important;
+
+    thead {
+        border-spacing: 0;
+        background: #01384D;
+        color: #fff;
+        padding: 16px 30px !important;
+        border: none !important;
+
+        th {
+            padding: 16px;
+        }
+    }
+
+    tbody {
+        td {
+            padding: 21px 0;
+            text-align: center;
+        }
+
+        tr {
+            td:last-child {
+                width: 300px;
+                .category-item-right {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+        }
+
+        .end-location {
+            padding-right: 28px;
+        }
+
+        tr:not(:last-child ) {
+            border-bottom: 1px solid rgba(1, 56, 77, 0.3) !important;
+            border-spacing: 2px;
+        }
+    }
+}

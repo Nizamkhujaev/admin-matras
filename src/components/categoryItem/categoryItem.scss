@@ -38,6 +38,13 @@
             padding: 8px;
             border-radius: 5px;
             cursor: pointer;
+            position: relative;
+            z-index: 2;
+
+            svg {
+                position: relative;
+                z-index: -1;
+            }
         }
     }
 }

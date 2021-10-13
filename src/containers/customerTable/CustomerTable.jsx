@@ -1,8 +1,8 @@
-import React,{useState,useEffect} from 'react'
+import React from 'react'
 import './customertable.scss'
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 
-function CustomerTable() {
+function CustomerTable({setDeletedCategory,editCategory,setEditCategory,setRouteName}) {
 
     
     let custo = [
@@ -21,21 +21,12 @@ function CustomerTable() {
             delete: ''
         },
     ]
-    
-    const [state, setState] = useState(custo)
-
-    useEffect(() => {
-        setState(state)
-    },[state])
 
     function click(e) {
-        // console.log(e.target.dataset.delete)
-
-        let dataa = state.find(item => item.id === parseInt(e.target.parentNode.parentNode.dataset.id))
-        custo.splice(dataa,1)
-        setState(state)
-        console.log(state)
-        // console.log(custo)
+    //    console.log(e.target.parentNode.parentNode.dataset.id)
+        setEditCategory(!editCategory)
+       setDeletedCategory(e.target.parentNode.parentNode.dataset.id)
+       setRouteName('customer')
     }
 
     return (
@@ -52,8 +43,8 @@ function CustomerTable() {
                 </thead>
                 <tbody>
                     {
-                        state.length > 0 ? (
-                            state.map((item, index) => (
+                        custo.length > 0 ? (
+                            custo.map((item, index) => (
                                 <tr data-id={item.id} key={index}>
                                     <th scope="row">{item.id}</th>
                                     <th>{item.date}</th>
@@ -65,7 +56,7 @@ function CustomerTable() {
                                         </label>
                                     </td>
                                     <td>
-                                        <div className='div-wrapper' onClick={click} data-delete={item.id}>
+                                        <div onClick={click} className='div-wrapper' data-delete={item.id}>
                                             <RestoreFromTrashIcon />
                                         </div>
                                     </td>

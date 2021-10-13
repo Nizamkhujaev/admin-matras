@@ -5,7 +5,15 @@ import './productItem.scss'
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
-function ProductItem({productName,category,price,weight,size,status, id}) {
+function ProductItem({productName,category,price,weight,size,status, id,editCategory, setEditCategory,setDeletedCategory,setRouteName}) {
+    
+    function click(e) {
+        // console.log(e.target.parentNode.parentNode.parentNode.dataset.product)
+        setEditCategory(!editCategory)
+        setDeletedCategory(e.target.parentNode.parentNode.parentNode.dataset.product)
+        setRouteName('product')
+    }
+    
     return (
         <tr data-product={id} className='product-item'>
                 <td>{productName}</td>
@@ -24,7 +32,7 @@ function ProductItem({productName,category,price,weight,size,status, id}) {
                         <div className="edit">
                             <ModeEditIcon />
                         </div>
-                        <div className="delete">
+                        <div onClick={click} className="delete">
                             <RestoreFromTrashIcon />
                         </div>
                     </div>

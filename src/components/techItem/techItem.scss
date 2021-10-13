@@ -31,4 +31,14 @@
         border-spacing: 2px;
         max-width: 400px;
     }
+
+    .delete {
+        position: relative;
+        z-index: 2;
+
+        svg {
+            position: relative;
+            z-index: -1;
+        }
+    }
 }

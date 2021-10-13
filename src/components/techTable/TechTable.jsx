@@ -3,7 +3,7 @@ import './techTable.scss'
 
 import TechItem from '../techItem'
 
-function TechTable() {
+function TechTable({ setDeletedCategory, editCategory, setEditCategory, setRouteName }) {
 
     let arr = [
         {
@@ -48,6 +48,10 @@ function TechTable() {
                                     videoLink={item.link}
                                     text={item.text}
                                     id={item.id}
+                                    setDeletedCategory={setDeletedCategory}
+                                    setRouteName={setRouteName}
+                                    editCategory={editCategory}
+                                    setEditCategory={setEditCategory}
                                 />
                             ))
                         ) : ''
