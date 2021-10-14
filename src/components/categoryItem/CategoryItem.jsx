@@ -9,7 +9,7 @@ function CategoryItem({title,id,editCategory,setEditCategory,setDeletedCategory,
 
     function deleteItem(e) {
         setEditCategory(!editCategory)
-        setRouteName('category')
+        setRouteName('https://matras-app.herokuapp.com/categories')
         setDeletedCategory(e.target.parentNode.parentNode.dataset.category)
     }
 

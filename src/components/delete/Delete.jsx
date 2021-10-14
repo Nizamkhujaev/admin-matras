@@ -1,14 +1,28 @@
 import React from 'react'
+import axios from 'axios'
 import './delete.scss'
 
 function Delete({editCategory,setEditCategory,deletedCategory,routeName}) {
 
     function deleteCategory() {
-        console.log(deletedCategory)
-        console.log(routeName)
-        setTimeout(() => {
-            setEditCategory(!editCategory)
-        },50)
+        console.log(typeof deletedCategory)
+        console.log(routeName, 'link')
+        axios.delete(`${routeName}`, {
+            id: deleteCategory
+        })
+        .then(response => {
+            console.log(response)
+            if(response.data.status) {
+                setEditCategory(!editCategory)
+                // window.location.reload()
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        }) 
+        // setTimeout(() => {
+        //     setEditCategory(!editCategory)
+        // },50)
     }
 
     return (

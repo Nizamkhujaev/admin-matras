@@ -3,7 +3,7 @@ import './product.scss'
 
 import PrductTable from '../../components/productTable'
 
-function Product({deleteCategory,setDeletedCategory,setRouteName,editCategory,setEditCategory}) {
+function Product({deleteCategory,setDeletedCategory,setRouteName,editCategory,setEditCategory,addProduct,setAddProduct}) {
     return (
         <div className='product'>
             <PrductTable
@@ -12,6 +12,8 @@ function Product({deleteCategory,setDeletedCategory,setRouteName,editCategory,se
                 setRouteName={setRouteName}
                 editCategory={editCategory}
                 setEditCategory={setEditCategory}
+                addProduct={addProduct}
+                setAddProduct = {setAddProduct}
             />
         </div>
     )

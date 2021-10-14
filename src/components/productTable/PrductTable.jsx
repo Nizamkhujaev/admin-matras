@@ -6,7 +6,7 @@ import ProductItem from '../productItem';
 // import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 // import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
-function PrductTable({ deleteCategory, setDeletedCategory, setRouteName,editCategory,setEditCategory }) {
+function PrductTable({ deleteCategory, setDeletedCategory, setRouteName,editCategory,setEditCategory,addProduct,setAddProduct }) {
 
     let products = [
         {
@@ -105,7 +105,7 @@ function PrductTable({ deleteCategory, setDeletedCategory, setRouteName,editCate
             </table>
 
             <div className="product-table-add">
-                <button className="product-table__btn-add">
+                <button onClick={() => setAddProduct(!addProduct)} className="product-table__btn-add">
                     Qo’shish
                 </button>
             </div>

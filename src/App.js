@@ -28,6 +28,7 @@ function App() {
   const [editCategory, setEditCategory] = useState(false)
   const [deletedCategory, setDeletedCategory] = useState(0)
   const [routeName,setRouteName] = useState()
+  const [addProduct, setAddProduct] = useState(false)
 
   return (
     <Router>
@@ -35,6 +36,7 @@ function App() {
         <Overlay
           addCategory={addCategory}
           editCategory={editCategory}
+          addProduct = {addProduct}
         />
         <Delete
           editCategory={editCategory}
@@ -42,12 +44,15 @@ function App() {
           deletedCategory={deletedCategory}
           routeName={routeName}
         />
-        <AddProduct/>
+        <AddProduct
+          addProduct={addProduct}
+          setAddProduct = {setAddProduct}
+        />
         <div className="App-left">
           <Sidebar />
         </div>
 
-        <div className={`App-right  ${addCategory ? 'category-add-app' : editCategory ? 'category-add-app' : ''}`}>
+        <div className={`App-right  ${addCategory ? 'category-add-app' : editCategory ? 'category-add-app' : addProduct ? 'category-add-app' : ''}`}>
           <Header />
           <Switch>
             <Route exact path='/' component={Home} />
@@ -81,6 +86,8 @@ function App() {
                 setRouteName={setRouteName}
                 editCategory={editCategory}
                 setEditCategory={setEditCategory}
+                addProduct={addProduct}
+                setAddProduct = {setAddProduct}
               />
             </Route>
 
