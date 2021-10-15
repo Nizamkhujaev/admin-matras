@@ -5,7 +5,7 @@ import './delete.scss'
 function Delete({editCategory,setEditCategory,deletedCategory,routeName}) {
 
     function deleteCategory() {
-        console.log(typeof deletedCategory)
+        console.log(deletedCategory)
         console.log(routeName, 'link')
         axios.delete(`${routeName}`, {
             id: deleteCategory

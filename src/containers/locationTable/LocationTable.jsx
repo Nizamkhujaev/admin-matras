@@ -3,7 +3,7 @@ import './locationTable.scss'
 
 import LocationItem from '../../components/locationItem'
 
-function LocationTable({ setDeletedCategory, editCategory, setEditCategory, setRouteName }) {
+function LocationTable({ setDeletedCategory, editCategory, setEditCategory, setRouteName, editLocation,setEditLocation }) {
 
     let locat = [
         {
@@ -57,6 +57,11 @@ function LocationTable({ setDeletedCategory, editCategory, setEditCategory, setR
                     }
                 </tbody>
             </table>
+            <div className="category-add">
+                <button onClick={() => setEditLocation(!editLocation)} className="category__btn-add">
+                    Qo’shish
+                </button>
+            </div>
         </div>
     )
 }

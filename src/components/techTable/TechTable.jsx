@@ -3,7 +3,7 @@ import './techTable.scss'
 
 import TechItem from '../techItem'
 
-function TechTable({ setDeletedCategory, editCategory, setEditCategory, setRouteName }) {
+function TechTable({ setDeletedCategory, editCategory, setEditCategory, setRouteName,addTech,setAddTech }) {
 
     let arr = [
         {
@@ -60,7 +60,7 @@ function TechTable({ setDeletedCategory, editCategory, setEditCategory, setRoute
             </table>
 
             <div className="tech-table-add">
-                <button className="tech-table__btn-add">
+                <button onClick={() => setAddTech(!addTech)} className="tech-table__btn-add">
                     Qo’shish
                 </button>
             </div>

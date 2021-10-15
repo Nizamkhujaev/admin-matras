@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import './category.scss'
 
 import axios from 'axios'
 
 import CategoryItem from '../../components/categoryItem'
 import AddCategory from '../../components/addCategory'
+import Loader from '../../components/loader'
 
-function Categories({addCategory, setAddCategory,editCategory,setEditCategory,setDeletedCategory,setRouteName}) {
+function Categories({ addCategory, setAddCategory, editCategory, setEditCategory, setDeletedCategory, setRouteName }) {
 
-    const [categories,setCategories] = useState({
+    const [categories, setCategories] = useState({
         isFetched: false,
         data: [],
         error: null
@@ -16,23 +17,23 @@ function Categories({addCategory, setAddCategory,editCategory,setEditCategory,se
 
     useEffect(() => {
         axios.get('https://matras-app.herokuapp.com/categories')
-        .then((response) => {
-            // console.log(response.data.data)
-            setCategories({
-                isFetched: true,
-                data: response.data,
-                error: false
+            .then((response) => {
+                // console.log(response.data.data)
+                setCategories({
+                    isFetched: true,
+                    data: response.data,
+                    error: false
+                })
             })
-        })
-        .catch((error) => {
-            // console.log(error)
-            setCategories({
-                isFetched: false,
-                data: [],
-                error: error
+            .catch((error) => {
+                // console.log(error)
+                setCategories({
+                    isFetched: false,
+                    data: [],
+                    error: error
+                })
             })
-        })
-    },[])
+    }, [])
 
     // let arr = [
     //     {
@@ -70,8 +71,8 @@ function Categories({addCategory, setAddCategory,editCategory,setEditCategory,se
                 <div className="category-bottom">
                     {
                         // console.log(categories.data.data)
-                        categories.isFetched ? (
-                            categories.data.data.map((item,index) => (
+                        categories.isFetched ?  (
+                            categories.data.data.map((item, index) => (
                                 <CategoryItem
                                     key={index}
                                     title={item.category_name}
@@ -82,7 +83,8 @@ function Categories({addCategory, setAddCategory,editCategory,setEditCategory,se
                                     setRouteName={setRouteName}
                                 />
                             ))
-                        ) : ''
+                        ) : <Loader/>
+                            
                     }
                 </div>
             </div>
