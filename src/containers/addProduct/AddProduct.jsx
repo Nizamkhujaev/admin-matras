@@ -105,7 +105,7 @@ function AddProduct({ addProduct, setAddProduct }) {
                             Toifalar
                         </label>
                         <select id="select" className="add-product-form-2-wrapper-select">
-                            <option value='1' disabled selected className="add-product-form-2-wrapper-select__option">masalan: Model C</option>
+                            <option defaultValue='1'  className="add-product-form-2-wrapper-select__option">masalan: Model C</option>
                             <option value="Model C" className="add-product-form-2-wrapper-select__option">Model C</option>
                             <option value="Model A" className="add-product-form-2-wrapper-select__option">Model A</option>
                             <option value="Model B" className="add-product-form-2-wrapper-select__option">Model B</option>
