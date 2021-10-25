@@ -4,13 +4,27 @@ import './categoryItem.scss'
 
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+// import request from '../../services/http';
 
-function CategoryItem({title,id,editCategory,setEditCategory,setDeletedCategory,setRouteName}) {
+function CategoryItem({title,id,editCategory,setEditCategory,setEditCatId,setDeletedCategory,setRouteName,categoryBlock,setCategoryBlock}) {
 
     function deleteItem(e) {
         setEditCategory(!editCategory)
-        setRouteName('https://matras-app.herokuapp.com/categories')
+        setRouteName('/categories')
         setDeletedCategory(e.target.parentNode.parentNode.dataset.category)
+    }
+
+    async function editable(e) {
+    //     let id = e.target.parentNode.parentNode.dataset.category
+    //     request.get(`/categories/${id}`)
+    //     .then(response => {
+    //         console.log(response)
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+        setCategoryBlock(!categoryBlock)
+        setEditCatId(e.target.parentNode.parentNode.dataset.category    )
     }
 
     return (
@@ -19,7 +33,7 @@ function CategoryItem({title,id,editCategory,setEditCategory,setDeletedCategory,
                 <h4 className="category-item-left__title">{title}</h4>
             </div>
             <div className="category-item-right">
-                <div className="edit">
+                <div onClick={editable} className="edit">
                     <ModeEditIcon/>
                 </div>
                 <div onClick={deleteItem} className="delete">

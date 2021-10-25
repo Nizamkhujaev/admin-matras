@@ -3,7 +3,7 @@ import './location.scss'
 
 import LocationTable from '../../containers/locationTable'
 
-function Location({setDeletedCategory,editCategory,setEditCategory,setRouteName,editLocation,setEditLocation}) {
+function Location({setDeletedCategory,editCategory,setEditCategory,setRouteName,editLocation,setEditLocation,editLoc,setEditLoc,setEditLocId}) {
     return (
         <div className='location'>
             <LocationTable
@@ -13,6 +13,9 @@ function Location({setDeletedCategory,editCategory,setEditCategory,setRouteName,
                 setEditCategory={setEditCategory}
                 editLocation={editLocation}
                 setEditLocation = {setEditLocation}
+                editLoc={editLoc}
+                setEditLoc={setEditLoc}
+                setEditLocId={setEditLocId}
             />
         </div>
     )

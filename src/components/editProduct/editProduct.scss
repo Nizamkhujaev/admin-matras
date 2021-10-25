@@ -1,0 +1,107 @@
+.edit-product {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+
+    &.edit-product-show {
+        width: 1130px;
+        padding: 0 0 30px 25px;
+        height: 440px;
+        margin: auto;
+        position: fixed;
+        background-color: #fff;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 101;
+    }
+
+    .slider-wrappper {
+        width: 230px;
+        height: 230px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+
+        &__input {
+            display: none;
+        }
+
+        &__label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: rgba(1, 56, 77, 0.1);
+        }
+    }
+
+    .slider-wrapper1 {
+        width: 230px;
+        height: 230px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+
+        &__input1 {
+            display: none;
+        }
+
+        &__label1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: rgba(1, 56, 77, 0.1);
+        }
+    }
+
+    .slider-wrappper3 {
+        width: 230px;
+        height: 230px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+
+        &__input1 {
+            display: none;
+        }
+
+        &__label1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: rgba(1, 56, 77, 0.1);
+        }
+    }
+
+    .slider-wrappper2 {
+        width: 230px;
+        height: 230px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+
+        &__input {
+            display: none;
+        }
+
+        &__label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            background-color: rgba(1, 56, 77, 0.1);
+        }
+    }
+}

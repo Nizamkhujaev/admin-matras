@@ -1,9 +1,45 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import './addTech.scss'
 
 import AddIcon from '@mui/icons-material/Add';
+import request from '../../services/http';
+
+import Language from '../../lang'
+import { useLang } from '../../context/LanguageProvider'
 
 function AddTech({addTech,setAddTech}) {
+
+    const titleRef = useRef(null)
+    const textRef = useRef(null)
+    const activeRef = useRef(null)
+    const posterRef = useRef(null)
+    const vidoRef = useRef(null)
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+
+        request.post('technology', {
+           name: titleRef.current.value,
+           description: textRef.current.value,
+           active: activeRef.current.checked,
+           poster: posterRef.current.value,
+           video: vidoRef.current.value,
+           token: window.localStorage.getItem('sessionToken')
+        })
+        .then(response => {
+            if(response.data.status === 201) {
+                setAddTech(!addTech)
+                window.location.reload()
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const [lang] = useLang()
+
     return (
         <div className={`add-tech ${addTech ? 'add-tech-show' : ''}`}>
             <button onClick={() => setAddTech(!addTech)} className="add-category-top">
@@ -11,31 +47,41 @@ function AddTech({addTech,setAddTech}) {
             </button>
 
             <h4 className="add-tech__title">
-                Qo’shish
+                {Language[lang].addTech.add}
             </h4>
 
-            <form className="add-tech-form">
+            <form onSubmit={handleSubmit} className="add-tech-form">
                 <div className="add-tech-form1">
                     <div className="add-product-form-2-wrapper">
                         <label htmlFor="product-namee" className="add-product-form-2-wrapper-select-label">
-                            Nomi
+                            {Language[lang].addTech.name}
                         </label>
-                        <input id='product-namee' type="text" placeholder='masalan:' className="add-product-form-2-wrapper__input" />
+                        <input
+                            ref={titleRef}
+                            id='product-namee'
+                            type="text"
+                            className="add-product-form-2-wrapper__input"
+                        />
                     </div>
 
                     <div className="add-product-form-2-wrapper">
                         <label htmlFor="product-nameee" className="add-product-form-2-wrapper-select-label">
-                            Nomi
+                            {Language[lang].addTech.text}
                         </label>
-                        <input id='product-nameee' type="text" placeholder='masalan:' className="add-product-form-2-wrapper__input" />
+                        <input
+                            ref={textRef}
+                            id='product-nameee'
+                            type="text"
+                            className="add-product-form-2-wrapper__input"
+                        />
                     </div>
 
                     <div className="add-product-form-2-wrapper flexed">
                         <label htmlFor="product-neww" className="add-product-form-2-wrapper-select-label">
-                            Navinka
+                            {Language[lang].addTech.new}
                         </label>
                         <label className="switch">
-                            <input id='product-neww' type="checkbox" />
+                            <input ref={activeRef} id='product-neww' type="checkbox" />
                             <span className="slider round"></span>
                         </label>
                     </div>
@@ -45,20 +91,31 @@ function AddTech({addTech,setAddTech}) {
                 <div className="add-tech-form2">
                     <div className="add-product-form-2-wrapper">
                         <label htmlFor="product-photo" className="add-product-form-2-wrapper-select-label">
-                            Rasm
+                            {Language[lang].addTech.photo}
                         </label>
-                        <input id='product-photo' type="text" className="add-product-form-2-wrapper__input" />
+
+                        <input
+                            ref={posterRef}
+                            id='product-photo'
+                            type="text"
+                            className="add-product-form-2-wrapper__input"
+                        />
                     </div>
 
                     <div className="add-product-form-2-wrapper">
                         <label htmlFor="product-video" className="add-product-form-2-wrapper-select-label">
-                            Video
+                            {Language[lang].addTech.video}
                         </label>
-                        <input id='product-video' type="text" className="add-product-form-2-wrapper__input" />
+                        <input
+                            ref={vidoRef}
+                            id='product-video'
+                            type="text"
+                            className="add-product-form-2-wrapper__input"
+                        />
                     </div>
 
                     <button className="add-product-form-4__btn">
-                        Qo’shish
+                        {Language[lang].addTech.add}
                     </button>
                 </div>
             </form>

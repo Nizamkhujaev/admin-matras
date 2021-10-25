@@ -3,7 +3,7 @@ import './teachnologies.scss'
 
 import TechTable from '../../components/techTable'
 
-function Technologies({setDeletedCategory,editCategory,setEditCategory,setRouteName,addTech,setAddTech}) {
+function Technologies({setDeletedCategory,editCategory,setEditCategory,setRouteName,addTech,setAddTech,editTech,setEditTech,setEditTechId}) {
     return (
         <div className='technologies'>
             <TechTable
@@ -13,6 +13,9 @@ function Technologies({setDeletedCategory,editCategory,setEditCategory,setRouteN
                 setEditCategory={setEditCategory}
                 addTech={addTech}
                 setAddTech={setAddTech}
+                editTech={editTech}
+                setEditTech = {setEditTech}
+                setEditTechId={setEditTechId}
             />
         </div>
     )

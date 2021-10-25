@@ -1,6 +1,7 @@
 import React, {useRef,useState} from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import './login.scss'
+import request from '../../services/http'
 
 function Login() {
 
@@ -18,12 +19,21 @@ function Login() {
     function loginSub(e) {
         e.preventDefault();
 
-        axios.post('https://matras-app.herokuapp.com/login', {
-            userName: username.current.value,
+        request.post('/login', {
+            username: username.current.value,
             password: userPassword.current.value
         })
         .then(response => {
-            console.log(response)
+            if(response.data.token) {
+                // console.log(response.data.data)
+                window.localStorage.setItem('sessionToken', response.data.token)
+                window.localStorage.setItem('admin__name', response.data.data.username)
+                window.localStorage.setItem('admin_img', response.data.data.user_img)
+                window.localStorage.setItem('lang', 'uz')
+                window.location.reload()
+            } else {
+                alert(response.data.message)
+            }
         })
         .catch(err => {
             console.log(err)

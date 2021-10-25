@@ -1,32 +1,65 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './customertable.scss'
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
+import request from '../../services/http';
+import Loader from '../../components/loader/Loader'
+import { useLang } from '../../context/LanguageProvider'
+import Language from '../../lang'
 
-function CustomerTable({setDeletedCategory,editCategory,setEditCategory,setRouteName}) {
+function CustomerTable({ setDeletedCategory, editCategory, setEditCategory, setRouteName }) {
 
-    
-    let custo = [
-        {
-            id: 1,
-            date: '12:13-12.05.2021',
-            phone: '+998 90 123 45 67',
-            feedBack: true,
-            delete: ''
-        },
-        {
-            id: 2,
-            date: '12:13-12.05.2021',
-            phone: '+998 90 123 45 67',
-            feedBack: false,
-            delete: ''
-        },
-    ]
+    const [customer, setCustomer] = useState({
+        isFetched: false,
+        data: [],
+        error: null
+    })
+
+    const [lang] = useLang()
+
+    const [changeInput,setChangeInput] = useState(false)
+
+    function change(e) {
+        setChangeInput(e.target.checked)
+        request.patch('/calls', {
+            id: e.target.parentNode.parentNode.parentNode.dataset.id,
+            token: localStorage.getItem('sessionToken')
+        })
+        .then(response => {
+            if(response.data.status === 200) {
+                setCustomer(customer)
+                // console.log(customer)
+            }
+        })
+        .catch(err => {})
+    }
+
+    try {
+        useEffect(() => {
+            let abortController = new AbortController();
+            request.get('/calls?page=1&limit=28')
+                .then(response => {
+                    // console.log(response.data.data)
+                    setCustomer({
+                        isFetched: true,
+                        data: response.data,
+                        error: false
+                    })
+                })
+                .catch(err => { })
+                return () => {
+                    abortController.abort();
+                  }
+        }, [changeInput])
+    } catch (error) {
+
+    }
+
 
     function click(e) {
-    //    console.log(e.target.parentNode.parentNode.dataset.id)
+        //    console.log(e.target.parentNode.parentNode.dataset.id)
         setEditCategory(!editCategory)
-       setDeletedCategory(e.target.parentNode.parentNode.dataset.id)
-       setRouteName('customer')
+        setDeletedCategory(e.target.parentNode.parentNode.dataset.id)
+        setRouteName('/calls')
     }
 
     return (
@@ -35,23 +68,23 @@ function CustomerTable({setDeletedCategory,editCategory,setEditCategory,setRoute
                 <thead className='table-main-header'>
                     <tr>
                         <th>ID</th>
-                        <th>Sana</th>
-                        <th>Telefon raqami</th>
-                        <th>Qayta aloqa</th>
+                        <th>{Language[lang].customers.date}</th>
+                        <th>{Language[lang].customers.phone}</th>
+                        <th>{Language[lang].customers.againCommunication}</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        custo.length > 0 ? (
-                            custo.map((item, index) => (
+                        customer.isFetched && customer.data.data.length > 0 ? (
+                            customer.data.data.map((item, index) => (
                                 <tr data-id={item.id} key={index}>
-                                    <th scope="row">{item.id}</th>
+                                    <th>{item.id}</th>
                                     <th>{item.date}</th>
-                                    <td>{item.phone}</td>
+                                    <td>{item.phone_number}</td>
                                     <td>
                                         <label className="switch">
-                                            <input onChange={e => e} checked={item.feedBack ? true : false} type="checkbox" />
+                                            <input value={changeInput} onChange={change} checked={item.active ? true : false} type="checkbox" />
                                             <span className="slider round"></span>
                                         </label>
                                     </td>
@@ -62,8 +95,9 @@ function CustomerTable({setDeletedCategory,editCategory,setEditCategory,setRoute
                                     </td>
                                 </tr>
                             ))
-                        ) : ''
+                        ) : <tr><td><Loader /></td></tr>
                     }
+
                 </tbody>
             </table>
         </div>

@@ -5,12 +5,43 @@ import AddImg from '../../assets/images/icons/addimg.svg'
 import './editLocation.scss'
 
 import AddIcon from '@mui/icons-material/Add';
+import Language from '../../lang'
+import {useLang} from '../../context/LanguageProvider'
 
 function EditLocation({editLocation, setEditLocation}) {
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+
+        let formData = new FormData()
+        formData.append('file', productPicRef.current.files[0])
+        formData.append('file', productPicRef1.current.files[0])
+        formData.append('file', productPicRef2.current.files[0])
+        formData.append('location', addressLink.current.value)
+        formData.append('text', infoRef.current.value)
+        formData.append('address', addressRef.current.value)
+        formData.append('active', activeRef.current.checked)
+        formData.append('token', window.localStorage.getItem('sessionToken'))
+
+        let response = await fetch('http://localhost:4500/location', {
+            method: 'POST',
+            body: formData
+        })
+
+        response = await response.json()
+        if(response.status === 201) {
+            window.location.reload();
+        }
+    }
 
     const productPicRef = useRef(null)
     const productPicRef1 = useRef(null)
     const productPicRef2 = useRef(null)
+    const addressRef = useRef(null)
+    const addressLink = useRef(null)
+    const activeRef = useRef(null)
+    const infoRef = useRef(null)
 
     let uploadImg = ''
     function handlePic() {
@@ -42,6 +73,8 @@ function EditLocation({editLocation, setEditLocation}) {
         reader2.readAsDataURL(productPicRef2.current.files[0])
     }
 
+    const [lang] = useLang()
+
     return (
         <div className={`edit-location ${editLocation ? 'edit-location-show' : ''}`}>
             <button onClick={() => setEditLocation(!editLocation)} className="add-category-top">
@@ -49,10 +82,10 @@ function EditLocation({editLocation, setEditLocation}) {
             </button>
 
             <h4 className="edit-location__title">
-                Tahrirlash
+                {Language[lang].categoryAdd.add}
             </h4>
 
-            <form className="edit-location-form">
+            <form onSubmit={handleSubmit} className="edit-location-form">
                 <div className="edit-location-form1">
                     <Slider {...SliderConfig}>
                         <div className="slider-wrapper edit-wrapper">
@@ -79,25 +112,35 @@ function EditLocation({editLocation, setEditLocation}) {
                 <div className="edit-location-form2">
                     <div className="add-product-form-2-wrapper">
                         <label htmlFor="product-location" className="add-product-form-2-wrapper-select-label">
-                            Manzil
+                            {Language[lang].location.text}
                         </label>
-                        <input id='product-location' type="text" className="add-product-form-2-wrapper__input" />
+                        <input
+                            ref={addressRef}
+                            id='product-location'
+                            type="text"
+                            className="add-product-form-2-wrapper__input"
+                        />
                     </div>
 
                     <div className="add-product-form-2-wrapper">
                         <label htmlFor="product-locationn" className="add-product-form-2-wrapper-select-label">
-                            Location
+                            {Language[lang].location.locationPlace}
                         </label>
-                        <input id='product-locationn' type="text" className="add-product-form-2-wrapper__input" />
+                        <input
+                            ref={addressLink}
+                            id='product-locationn'
+                            type="text"
+                            className="add-product-form-2-wrapper__input"
+                        />
                     </div>
 
 
                     <div className="add-product-form-2-wrapper flexed">
                         <label htmlFor="product-state" className="add-product-form-2-wrapper-select-label">
-                            Holat
+                            {Language[lang].addProduct.active}
                         </label>
                         <label className="switch">
-                            <input id='product-state' type="checkbox" />
+                            <input ref={activeRef} id='product-state' type="checkbox" />
                             <span className="slider round"></span>
                         </label>
                     </div>
@@ -108,15 +151,20 @@ function EditLocation({editLocation, setEditLocation}) {
                 <div className="edit-location-form3">
                     <div className="add-product-form-2-wrapper">
                         <label htmlFor="edit-textarea" className="add-product-form-2-wrapper-select-label">
-                            Matn
+                            {Language[lang].location.text}
                         </label>
-                        <textarea id="edit-textarea" className="add-product-form-2-wrapper__textarea"></textarea>
+                        <textarea
+                            ref={infoRef}
+                            id="edit-textarea"
+                            className="add-product-form-2-wrapper__textarea"
+                        ></textarea>
                     </div>
 
                     <button className="add-product-form-4__btn">
-                        Qo’shish
+                        {Language[lang].categoryAdd.add}
                     </button>
                 </div>
+
             </form>
         </div>
     )

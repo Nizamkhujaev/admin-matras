@@ -1,0 +1,22 @@
+.edit-carousel {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+
+    &.edit-carousel-show {
+        width: 800px;
+        height: 750px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background-color: #fff;
+        z-index: 200;
+    }
+
+    .own-slider-form-wrapperr {
+        background-repeat: no-repeat;
+    }
+}

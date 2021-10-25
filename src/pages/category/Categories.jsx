@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './category.scss'
-
-import axios from 'axios'
+import request from '../../services/http'
+import Language from '../../lang'
+import { useLang } from '../../context/LanguageProvider'
 
 import CategoryItem from '../../components/categoryItem'
 import AddCategory from '../../components/addCategory'
 import Loader from '../../components/loader'
 
-function Categories({ addCategory, setAddCategory, editCategory, setEditCategory, setDeletedCategory, setRouteName }) {
+function Categories({ addCategory,setEditCatId, setAddCategory, editCategory, setEditCategory, setDeletedCategory, setRouteName,categoryBlock,setCategoryBlock }) {
 
     const [categories, setCategories] = useState({
         isFetched: false,
@@ -15,63 +16,45 @@ function Categories({ addCategory, setAddCategory, editCategory, setEditCategory
         error: null
     })
 
-    useEffect(() => {
-        axios.get('https://matras-app.herokuapp.com/categories')
-            .then((response) => {
-                // console.log(response.data.data)
-                setCategories({
-                    isFetched: true,
-                    data: response.data,
-                    error: false
-                })
-            })
-            .catch((error) => {
-                // console.log(error)
-                setCategories({
-                    isFetched: false,
-                    data: [],
-                    error: error
-                })
-            })
-    }, [])
+    const [lang] = useLang()
 
-    // let arr = [
-    //     {
-    //         id: 1,
-    //         title: 'Model C'
-    //     },
-    //     {
-    //         id: 2,
-    //         title: 'Model B'
-    //     },
-    //     {
-    //         id: 3,
-    //         title: 'Model A'
-    //     },
-    //     {
-    //         id: 4,
-    //         title: 'Model W'
-    //     },
-    //     {
-    //         id: 5,
-    //         title: 'Model Q'
-    //     },
-    //     {
-    //         id: 6,
-    //         title: 'Model S'
-    //     },
-    // ]
+    try {
+
+        useEffect(() => {
+            let abortController = new AbortController();
+            request.get('/categories')
+                .then((response) => {
+                    setCategories({
+                        isFetched: true,
+                        data: response.data,
+                        error: false
+                    })
+                })
+                .catch((error) => {
+                    setCategories({
+                        isFetched: false,
+                        data: [],
+                        error: error
+                    })
+                })
+            return () => {
+                abortController.abort();
+            }
+        }, [])
+    } catch (error) {
+
+    }
 
     return (
         <div className={`category`}>
             <div className="category-table">
                 <div className="category-table-top">
-                    <h4 className="category-table-top__title">Toifalar</h4>
+                    <h4 className="category-table-top__title">{Language[lang].categories.categoryName}</h4>
                 </div>
                 <div className="category-bottom">
                     {
                         // console.log(categories.data.data)
-                        categories.isFetched ?  (
+                        categories.isFetched && categories.data.data ? (
                             categories.data.data.map((item, index) => (
                                 <CategoryItem
                                     key={index}
@@ -81,17 +64,20 @@ function Categories({ addCategory, setAddCategory, editCategory, setEditCategory
                                     setEditCategory={setEditCategory}
                                     setDeletedCategory={setDeletedCategory}
                                     setRouteName={setRouteName}
+                                    categoryBlock={categoryBlock}
+                                    setCategoryBlock={setCategoryBlock}
+                                    setEditCatId={setEditCatId}
                                 />
                             ))
-                        ) : <Loader/>
-                            
+                        ) : <Loader />
+
                     }
                 </div>
             </div>
 
             <div className="category-add">
                 <button onClick={() => setAddCategory(!addCategory)} className="category__btn-add">
-                    Qo’shish
+                    {Language[lang].categories.categoryAdd}
                 </button>
             </div>
 

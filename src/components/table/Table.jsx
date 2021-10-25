@@ -1,55 +1,58 @@
-import React from 'react'
+import React, {useEffect,useState} from 'react'
 import './table.scss'
+import request from '../../services/http'
+import Loader from '../loader'
+import {useLang} from '../../context/LanguageProvider'
+import Language from '../../lang'
 
 function Table() {
 
-    let arr = [
-        {
-            id: 1,
-            name: 'Mark',
-            phone: '+998 90 123 45 67',
-            productName: 'Ortopedik Eko matras',
-            amount: '4',
-            feedBack: true
-        },
-        {
-            id: 2,
-            name: 'Twen',
-            phone: '+998 91 123 45 67',
-            productName: 'Ortopedik Eko matras',
-            amount: '4',
-            feedBack: true
-        },
-        {
-            id: 3,
-            name: 'Zuckerberg',
-            phone: '+998 92 123 45 67',
-            productName: 'Ortopedik Eko matras',
-            amount: '4',
-            feedBack: false
-        },
-        {
-            id: 4,
-            name: 'Ilon',
-            phone: '+998 93 123 45 67',
-            productName: 'Ortopedik Eko matras',
-            amount: '4',
-            feedBack: true
-        },
-        
-    ]
+    const [orders,setOrders] = useState({
+        isFetched: false,
+        data: [],
+        error: null
+    })
 
-    // function checking(e) {
-    //     console.log(arr)
-    //     let data = arr.find(item => item.id === e.target.parentNode.parentNode.parentNode.dataset.id)
-    //     console.log(data, 'start')
-    //     if(e.target.checked === false) {
-    //         data.feedBack = false
-    //     } else {
-    //         data.feedBack = true
-    //     }
-    //     console.log(data, 'over')
-    // }
+    const [lang] = useLang();
+
+    const [changeInput,setChangeInput] = useState(false)
+
+    function change(e) {
+        // console.log(e.target.parentNode.parentNode.parentNode.dataset.id)
+        setChangeInput(e.target.checked)
+        request.put(`/orders/${e.target.parentNode.parentNode.parentNode.dataset.id}`, {
+            token: localStorage.getItem('sessionToken')
+        })
+        .then(response => {
+            if(response.data.status === 200) {
+                // setCustomer(customer)
+                setOrders(orders)
+                // console.log(customer)
+            }
+            // console.log(response)
+        })
+        .catch(err => {})
+    }
+
+    useEffect(() => {
+        request.get('orders?page=1&limit=38')
+        .then(response => {
+            setOrders({
+                isFetched: true,
+                data: response.data,
+                error: false
+            })
+        })
+        .catch(err => {
+            setOrders({
+                isFetched: false,
+                data: [],
+                error: err
+            })
+        })
+    }, [changeInput])
+
+    // console.log(orders.data.data)
 
     return (
         <div className='table'>
@@ -57,32 +60,34 @@ function Table() {
                 <thead className='table-main-header'>
                     <tr>
                         <th>ID</th>
-                        <th>Ismi</th>
-                        <th>Telefon raqami</th>
-                        <th>Mahsulot nomlari</th>
-                        <th>Miqdor</th>
-                        <th>Qayta aloqa</th>
+                        <th>{Language[lang].orders.name}</th>
+                        <th>{Language[lang].orders.phone}</th>
+                        <th>{Language[lang].orders.nameProducts}</th>
+                        <th>{Language[lang].orders.amount}</th>
+                        <th>{Language[lang].orders.againCommunication}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        arr && arr.length > 0 ? (
-                            arr.map((item, index) => (
-                                <tr data-id={item.id} key={index}>
-                                    <th scope="row">{item.id}</th>
-                                    <td>{item.name}</td>
-                                    <td>{item.phone}</td>
-                                    <td>{item.productName}</td>
-                                    <td>{item.amount}</td>
+                        orders.isFetched && orders.data.data ? (
+                            orders.data.data.map((item,index) => (
+                                <tr data-id={item.order_id} key={index}>
+                                    <th scope="row">{item.order_id}</th>
+                                    <td>{item.client_name}</td>
+                                    <td>{item.client_contact}</td>
+                                    <td>{item.product_name}</td>
+                                    <td>{item.count}</td>
                                     <td>
                                         <label className="switch">
-                                            <input checked={item.feedBack ? true : false} onChange={e => e} type="checkbox" />
+                                            <input value={changeInput} checked={item.active ? true : false} onChange={change} type="checkbox" />
                                             <span className="slider round"></span>
                                         </label>
                                     </td>
                                 </tr>
                             ))
-                        ) : ''
+                        ) : <tr>
+                            <td><Loader/></td>
+                        </tr>
                     }
                 </tbody>
             </table>

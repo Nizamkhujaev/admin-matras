@@ -1,0 +1,61 @@
+.slider-list {
+    padding: 30px 30px 100px 30px;
+    box-sizing: border-box;
+    // width: 90%;
+    
+    table {
+        border: 1px solid rgba(1, 56, 77, 0.3) !important;
+        border-collapse: collapse !important;
+        // border:1px solid black;
+        width: 100%;
+        border-spacing: 0;
+
+        thead {
+            border-spacing: 0;
+            background: #01384D;
+            color: #fff;
+            padding: 16px 30px !important;
+            border: none !important;
+
+            th {
+                padding: 16px;
+            }
+        }
+
+        tbody {
+            tr:not(:last-child ) {
+                border-bottom: 1px solid rgba(1, 56, 77, 0.3) !important;
+                border-spacing: 2px;
+            }
+        }
+
+        td {
+            padding: 21px 0;
+            text-align: center;
+        }
+
+        tr {
+            td:last-child {
+                width: 300px;
+                .category-item-right {
+                    justify-content: flex-end;
+                    
+                }
+            }
+        }
+    }
+
+    .end-location {
+        padding-right: 28px;
+    }
+    
+    .edit {
+        position: relative;
+        z-index: 2;
+    
+        svg {
+            position: relative;
+            z-index: -1;
+        }
+    }
+}

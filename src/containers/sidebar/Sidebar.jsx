@@ -11,8 +11,17 @@ import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
+import EqualizerIcon from '@mui/icons-material/Equalizer';
+
+
+import Language from '../../lang/index'
+import {useLang} from '../../context/LanguageProvider'
 
 function Sidebar() {
+    
+    const [lang] = useLang()
+
     return (
         <div className='sidebar'>
             <NavLink className="sidebar-top" to='/'>
@@ -21,34 +30,44 @@ function Sidebar() {
 
             <div className="sidebar-bottom">
                 <SidebarItem
-                    title='Buyurtmalar'
+                    title={Language[lang].sidebar.orders}
                     img={<HomeIcon/>}
                     link='/'
                 />
                 <SidebarItem
-                    title='Сustomers'
+                    title={Language[lang].sidebar.customers}
                     img={<PersonIcon/>}
                     link='/customers'
                 />
                 <SidebarItem
-                    title='Toifalar'
+                    title={Language[lang].sidebar.category}
                     img={<LeaderboardIcon/>}
                     link='/categories'
                 />
                 <SidebarItem
-                    title='Mahsulotlar'
+                    title={Language[lang].sidebar.product}
                     img={<ShoppingCartIcon/>}
                     link='/products'
                 />
                 <SidebarItem
-                    title='Texnologiyalar'
+                    title={Language[lang].sidebar.tech}
                     img={<SettingsSuggestIcon/>}
                     link='/settings'
                 />
                 <SidebarItem
-                    title='Manzil'
+                    title={Language[lang].sidebar.location}
                     img={<LocationOnIcon/>}
                     link='/location'
+                />
+                <SidebarItem
+                    title={Language[lang].sidebar.slider}
+                    img={<PhotoSizeSelectActualIcon/>}
+                    link='/slider'
+                />
+                <SidebarItem
+                    title={Language[lang].sidebar.static}
+                    img={<EqualizerIcon/>}
+                    link='/results'
                 />
             </div>
         </div>

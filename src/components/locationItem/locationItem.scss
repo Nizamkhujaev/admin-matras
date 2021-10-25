@@ -2,6 +2,16 @@
     padding-right: 28px;
 }
 
+.edit {
+    position: relative;
+    z-index: 2;
+
+    svg {
+        position: relative;
+        z-index: -1;
+    }
+}
+
 td {
     a {
         color: red;

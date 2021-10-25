@@ -4,14 +4,35 @@ import './productItem.scss'
 
 import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import request from '../../services/http';
 
-function ProductItem({productName,category,price,weight,size,status, id,editCategory, setEditCategory,setDeletedCategory,setRouteName}) {
+function ProductItem({productName,category,price,weight,size,status, id,editCategory, setEditCategory,setDeletedCategory,setRouteName, editProduct,setProduct,setProductId}) {
     
     function click(e) {
-        // console.log(e.target.parentNode.parentNode.parentNode.dataset.product)
         setEditCategory(!editCategory)
         setDeletedCategory(e.target.parentNode.parentNode.parentNode.dataset.product)
-        setRouteName('product')
+        setRouteName('/products')
+    }
+
+    // console.log(status)
+
+    function edited(e) {
+        setProduct(!editProduct)
+        setProductId(e.target.parentNode.parentNode.parentNode.dataset.product)
+    }
+
+    function changer(e) {
+
+        request.patch('/products', {
+            id: e.target.parentNode.parentNode.parentNode.dataset.product,
+            token: window.localStorage.getItem('sessionToken')
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
     
     return (
@@ -23,13 +44,17 @@ function ProductItem({productName,category,price,weight,size,status, id,editCate
                 <td>{size}</td>
                 <td>
                     <label className="switch">
-                        <input onChange={e => e} checked={status ? true: false} type="checkbox" />
+                        <input
+                            onChange={changer}
+                            checked={status ? true : false}
+                            type="checkbox"
+                        />
                         <span className="slider round"></span>
                     </label>
                 </td>
                 <td className='end-product'>
                     <div className="category-item-right">
-                        <div className="edit">
+                        <div onClick={edited} className="edit">
                             <ModeEditIcon />
                         </div>
                         <div onClick={click} className="delete">

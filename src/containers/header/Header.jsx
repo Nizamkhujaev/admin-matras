@@ -3,7 +3,7 @@ import './header.scss'
 
 import UserAva from '../../assets/images/img/user-ava.png'
 
-function Header() {
+function Header({modal,setModal}) {
 
     return (
         <div className='header'>
@@ -11,9 +11,9 @@ function Header() {
                 <input type="search" placeholder='User' className="header-left__input" />
             </div>
 
-            <div className="header-right">
-                <img src={UserAva} alt="user-img" className="header-right__img" />
-                <h4 className="header-right__title">John Doe</h4>
+            <div onClick={() => setModal(!modal)} className="header-right">
+                <img src={(localStorage.getItem('admin_img') ? localStorage.getItem('admin_img') : UserAva)} alt="user-img" className="header-right__img" />
+                <h4 className="header-right__title">{localStorage.getItem('admin__name') ? localStorage.getItem('admin__name') : 'John Doe'}</h4>
             </div>
         </div>
     )

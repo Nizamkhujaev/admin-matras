@@ -1,39 +1,59 @@
 import React from 'react'
-import axios from 'axios'
+import { useLang } from '../../context/LanguageProvider'
+import Language from '../../lang'
 import './delete.scss'
 
-function Delete({editCategory,setEditCategory,deletedCategory,routeName}) {
 
-    function deleteCategory() {
-        console.log(deletedCategory)
-        console.log(routeName, 'link')
-        axios.delete(`${routeName}`, {
-            id: deleteCategory
+function Delete({editCategory,setEditCategory,deletedCategory,routeName}) {
+    const [lang] = useLang()
+
+    async function deleteCategory() {
+
+        let obj = {
+            id: parseInt(deletedCategory),
+            token: window.localStorage.getItem('sessionToken')
+        }
+
+
+        let response = await fetch(`http://localhost:4500${routeName}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+
+            },
+            body: JSON.stringify(obj)
         })
-        .then(response => {
-            console.log(response)
-            if(response.data.status) {
-                setEditCategory(!editCategory)
-                // window.location.reload()
-            }
-        })
-        .catch(err => {
-            console.log(err)
-        }) 
-        // setTimeout(() => {
-        //     setEditCategory(!editCategory)
-        // },50)
+
+        response = await response.json()
+        console.log(response)
+        if(response.status === 200) {
+            setEditCategory(!editCategory)
+            window.location.reload()
+        }
+        // console.log(response)
+        // return response
     }
 
     return (
         <div className={`delete-wrapper ${editCategory ? 'delete-category' : ''}`}>
             <h4 className="delete-wrapper__title">
-                Haqiqatdan ham o’chirmoqchimisiz?
+                {Language[lang].delete.deleteTitle}
             </h4>
 
             <div className="delete-wrapper-bottom">
-                <button onClick={() => setEditCategory(!editCategory)} className="delete-wrapper-bottom__no">YO’Q</button>
-                <button onClick={deleteCategory} className="delete-wrapper-bottom__yes">HA</button>
+                <button
+                    onClick={() => setEditCategory(!editCategory)}
+                    className="delete-wrapper-bottom__no"
+                >
+                    {Language[lang].delete.no}
+                </button>
+                
+                <button
+                    onClick={deleteCategory}
+                    className="delete-wrapper-bottom__yes"
+                >
+                    {Language[lang].delete.yes}
+                </button>
             </div>
         </div>
     )

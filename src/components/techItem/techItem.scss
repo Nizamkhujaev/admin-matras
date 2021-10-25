@@ -15,6 +15,13 @@
             padding: 8px;
             cursor: pointer;
             margin-right: 10px;
+            position: relative;
+            z-index: 2;
+
+            svg {
+                position: relative;
+                z-index: -1;
+            }
         }
 
         .delete {
@@ -32,6 +39,26 @@
         max-width: 400px;
     }
 
+    td:first-child {
+        width: 300px;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    td:nth-child(2) {
+        width: 500px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    td:nth-child(3) {
+        width: 400px;
+        padding: 0 10px;
+        box-sizing: border-box;
+        a {
+            color: #000;
+        }
+    }
     .delete {
         position: relative;
         z-index: 2;

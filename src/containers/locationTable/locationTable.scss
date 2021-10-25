@@ -27,6 +27,16 @@
                     justify-content: flex-end;
                 }
             }
+
+            td {
+                &:first-child {
+                    max-width: 400px;
+                }
+            
+                &:nth-child(2) {
+                    max-width: 300px;
+                }
+            }
         }
 
         .end-location {

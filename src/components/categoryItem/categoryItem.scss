@@ -29,7 +29,14 @@
             background-color: rgba(1,56,77,0.1);
             padding: 8px;
             cursor: pointer;
+            position: relative;
+            z-index: 2;
             margin-right: 10px;
+
+            svg {
+                position: relative;
+                z-index: -1;
+            }
         }
 
         .delete {
